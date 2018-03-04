@@ -6,5 +6,5 @@ info/
 objects/
 refs/
 HEAD
-config
 description
+.DS_Store

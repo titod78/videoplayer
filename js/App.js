@@ -3,6 +3,8 @@
  * From this controller is instanciated the movie information card component
  */
 
+import { Config } from './config/config.js';
+
 /**
  * Select component for language selection
  * @type {Class}
@@ -43,13 +45,17 @@ import { movieDetailCard } from './components/movie-detail-card/movieDetailCard.
    * Default language
    * @type {String}
    */
-  let languageSelected = 'en';
+  let languageSelected;
+
+  let config;
 
   /**
    * Initialitze method
    * @return {void}
    */
   const init = function () {
+    config = new Config();
+    languageSelected = config.lang
     loadSelectLanguage();
     addSelectLanguage();
     loadButton();
@@ -60,28 +66,10 @@ import { movieDetailCard } from './components/movie-detail-card/movieDetailCard.
    * Returns configuration data for select component
    * @return {Object}
    */
-  const getSelectLanguageData = function () {
+  const getSelectLanguageConfig = function () {
     return {
-      templateData: {
-        languages: [ {
-          value: 'en',
-          name: 'English',
-          dir: 'ltr'
-        }, {
-          value: 'ar',
-          name: 'Arabic',
-          dir: 'rtl'
-        } ],
-        className: 'select-language',
-        label: 'Select language'
-      },
-      fn: function ( lang, dir ) {
-        languageSelected = lang;
-        setDir( dir );
-        if ( button === null ) {
-          loadMovieDetail( lang );
-        }
-      }
+      templateData: config.selectLanguageTemplateData,
+      fn: setLanguage
     };
   };
 
@@ -114,7 +102,7 @@ import { movieDetailCard } from './components/movie-detail-card/movieDetailCard.
    * @return {Void}
    */
   const loadSelectLanguage = function () {
-    select = new selectLanguage( getSelectLanguageData() );
+    select = new selectLanguage( getSelectLanguageConfig() );
   };
 
   /**
@@ -126,6 +114,20 @@ import { movieDetailCard } from './components/movie-detail-card/movieDetailCard.
       .innerHTML = select.element;
     select.bindEvent();
   };
+
+  /**
+   * Callback for select language select
+   * @param {String} Selected language
+   * @param {String} Text direction
+   * @return {Void}
+   */
+  const setLanguage = function ( lang, dir ) {
+    languageSelected = lang;
+    setDir( dir );
+    if ( button === null ) {
+      loadMovieDetail( lang );
+    }
+  }
 
   /**
    * Sets de document direction
@@ -142,10 +144,7 @@ import { movieDetailCard } from './components/movie-detail-card/movieDetailCard.
    */
   const getButtonData = function () {
     return {
-      templateData: {
-        className: 'movie-detail-button',
-        label: 'Get movie detail'
-      },
+      templateData: config.buttonTemplateData,
       fn: loadMovieDetail
     };
   };

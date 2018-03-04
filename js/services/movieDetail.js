@@ -1,3 +1,5 @@
+import { Config } from '../config/config.js';
+
 /**
  * Send request to service for obtains the movie information
  * @return {Class}
@@ -6,14 +8,16 @@
 export function movieDetailService() {
   'use strict';
 
+  const config = new Config();
+
   /**
    * Sends request to get movie detail data
    * @param  {Function} success Callback for success response
    * @return {Void}
    */
   function fetchMovieDetail( success, language ) {
-    const lang = language || 'en',
-      url = 'https://api.themoviedb.org/3/movie/9761-elephants-dream?api_key=219c9d47e90e5df6fb877db3f2d873cf&language=' + lang;
+    const lang = language || config.lang,
+      url = config.movieDetailUrl + lang;
 
     fetch( url )
       .then( response => {

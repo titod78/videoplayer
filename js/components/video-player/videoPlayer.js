@@ -1,3 +1,5 @@
+import { Config } from '../../config/config.js';
+
 /**
  * Create the video using dash.js library
  * @return {void}
@@ -9,27 +11,23 @@ import { tpl } from './videoPlayerTpl.js';
 function videoPlayer() {
   'use strict';
 
+  let config;
+
   const init = function () {
-    if ( isSafari() === false ) {
+    config = new Config();
+    if ( config.isSafari === false ) {
       createVideoPlayer();
     } else {
       loadVideo();
     }
   };
 
-  /**
-   * Returns if the browser is Safari or not
-   * @return {Boolean}
-   */
-  const isSafari = function () {
-    return /Safari/.test( navigator.userAgent ) && /Apple Computer/.test( navigator.vendor );
-  };
-
   const getUrl = function () {
-    let url = 'http://media.axprod.net/dash/ED_TTML_NEW/Clear/Manifest_sub_in.mpd';
-    if ( isSafari() ) {
-      url = 'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8';
+    let url = config.videoUrl;
+    if ( config.isSafari ) {
+      url = config.videoUrlSafari;
     }
+
     return url;
   };
 
@@ -39,7 +37,6 @@ function videoPlayer() {
    */
   const createVideoPlayer = function () {
     const player = dashjs.MediaPlayer().create();
-
     loadVideo();
     player.initialize( document.querySelector( '#videoPlayer' ), getUrl(), true );
   };
@@ -50,7 +47,7 @@ function videoPlayer() {
    */
   const getTemplate = function () {
     const data = {
-      isSafari: isSafari(),
+      isSafari: config.isSafari,
       url: getUrl()
     };
 
