@@ -1,6 +1,7 @@
+
 # <a id="Video_Player_0"></a>Video Player
 
-# <a id="STARZ_PLAY_Code_Challenge_4"></a>Vanilla JavaScript Video Player.
+# <a id="STARZ_PLAY_Code_Challenge_4"></a>JavaScript ES6 Video Player.
 
 *   Video Web Page
 *   You can play video in Chrome, Firefox and Safari
@@ -8,7 +9,7 @@
 *   The video has subtitles
 *   English and Arabic languages are supported
 
-For this project, i used a modular architecture based on components made with Vanilla JS. The reason is that i needn’t data persistence.
+For this project, i used a modular architecture based on components made with JavaScript ES6. The reason is that i needn’t data persistence.
 if is necessary, the components return a public interface for can used it from another components.
 The request to REST service are cached in broeser session storage.
 
@@ -16,13 +17,12 @@ The request to REST service are cached in broeser session storage.
 
 The technologies that i used are:
 
-*   [JavaScript] - JS Vanilla
+*   [JavaScript] - ES6
 *   [HTML5]
 *   [CSS3]
 
 ### <a id="External_libraries_24"></a>External libraries
 
-*   [underscorejs](http://underscorejs.org/) - JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects
 *   [webpack](https://webpack.js.org/) - Module bundler for modern JavaScript applications
 *   [dashjs](http://cdn.dashjs.org/latest/jsdoc/index.html) - A reference client implementation for the playback of MPEG DASH via JavaScript
 

@@ -4,62 +4,64 @@
  * @return {Objet} [description]
  */
 
-module.exports = function ( config ) {
-  'use strict';
+export class buttonGetMovieDetail {
 
-  var element,
-
-    /**
-     * Selector of the button
-     * @type {String}
-     */
-    selector = '.' + config.templateData.className,
-
-    /**
-     * Initialitze method
-     * @return {void}
-     */
-    init = function () {
-      element = getTemplate();
-    },
-
-    /**
-     * Returns the component template
-     * @return {HTMLelement}
-     */
-    getTemplate = function () {
-      var tpl = _.template( '<button class="btn <%= className %>" type="button"><span><%= label %></span></button>' );
-      return tpl( config.templateData );
-    },
-
-    /**
-     * Bind click event to component
-     * @return {void}
-     */
-    bindEvent = function () {
-      document
-        .querySelector( selector )
-        .addEventListener( 'click', config.fn, false );
-    },
-
-    /**
-     * Remove event click and remove component from DOM
-     * @return {void}
-     */
-    remove = function () {
-      var el = document.querySelector( selector );
-      el.removeEventListener( 'click', config.fn, false );
-      el.parentNode.removeChild( el );
-    };
-
-  init();
+  constructor( config ) {
+    this._config = config;
+    this._element = null;
+    this._selector = '.' + this._config.templateData.className;
+    this.init();
+  }
 
   /**
-   * Public API
+   * Returns the component template
+   * @return {HTMLelement}
    */
-  return {
-    element: element,
-    bindEvent: bindEvent,
-    remove: remove
-  };
+  getTemplate() {
+    let className = this.config.templateData.className,
+      label = this.config.templateData.label;
+
+    return `<button class="btn ${className}" type="button"><span>${label}</span></button>`;
+  }
+
+  /**
+   * Initialitze method
+   * @return {void}
+   */
+  init() {
+    this._element = this.getTemplate();
+  }
+
+  /**
+   * Bind click event to component
+   * @return {void}
+   */
+  bindEvent() {
+    document
+      .querySelector( this.selector )
+      .addEventListener( 'click', this.config.fn, false );
+  }
+
+  /**
+   * Remove event click and remove component from DOM
+   * @return {void}
+   */
+  remove() {
+    let el = document.querySelector( this.selector );
+    el.removeEventListener( 'click', this.config.fn, false );
+    el.parentNode.removeChild( el );
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  get config() {
+    return this._config;
+  }
+
+  get selector() {
+    return this._selector;
+  }
+
 };

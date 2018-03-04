@@ -4,13 +4,13 @@
  * @return {void}
  */
 
-var tpl = require( './movieDetailCard.html' );
-var videoPlayer = require( '../video-player/videoPlayer.js' );
+import { videoPlayer } from '../video-player/videoPlayer.js';
+import { tpl } from './movieDetailCardTpl.js';
 
-module.exports = function ( data ) {
+function movieDetailCard( data ) {
   'use strict';
 
-  var genre = getGenres(),
+  const genre = getGenres(),
     year = getYear(),
     posterUrl = getPosterUrl(),
     runTime = getRuntime();
@@ -29,16 +29,15 @@ module.exports = function ( data ) {
    * @return {Function}
    */
   function getTemplate() {
-    var allData = _.extend( data, genre, year, posterUrl, runTime );
-    return _.template( tpl.movieDetailCardTemplate( allData ) );
+    const allData = Object.assign( data, genre, year, posterUrl, runTime );
+    return tpl( allData );
   }
 
   /**
    * Adds movie information template to container
    */
   function addMovieInformation() {
-    var content = getTemplate();
-    document.querySelector( '.movie-information' ).innerHTML = content();
+    document.querySelector( '.movie-information' ).innerHTML = getTemplate();
   }
 
   /**
@@ -46,7 +45,7 @@ module.exports = function ( data ) {
    * @return {void}
    */
   function bindEvent() {
-    var selector = '.card_right__button a',
+    const selector = '.card_right__button a',
       el = document.querySelector( selector );
     el.addEventListener( 'click', loadVideoPlayer, false );
   }
@@ -67,7 +66,7 @@ module.exports = function ( data ) {
    */
   function getGenres() {
     return {
-      genre: data.genres.map( function ( gen ) {
+      genre: data.genres.map( gen => {
         return ' ' + gen.name;
       } )
     };
@@ -78,7 +77,7 @@ module.exports = function ( data ) {
    * @return {Object}
    */
   function getYear() {
-    var parsedDate = new Date( data.release_date );
+    const parsedDate = new Date( data.release_date );
     return {
       year: parsedDate.getFullYear()
     };
@@ -99,8 +98,8 @@ module.exports = function ( data ) {
    * @return {Object}
    */
   function getRuntime() {
-    var runtime = data.runtime,
-      hours = Math.floor( runtime / 3600 ),
+    const runtime = data.runtime;
+    let hours = Math.floor( runtime / 3600 ),
       minutes = runtime - ( hours * 3600 );
 
     if ( hours < 10 ) {
@@ -118,3 +117,5 @@ module.exports = function ( data ) {
   init();
 
 };
+
+export { movieDetailCard };

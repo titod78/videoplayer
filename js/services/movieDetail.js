@@ -3,7 +3,7 @@
  * @return {Class}
  */
 
-module.exports = function () {
+export function movieDetailService() {
   'use strict';
 
   /**
@@ -12,18 +12,18 @@ module.exports = function () {
    * @return {Void}
    */
   function fetchMovieDetail( success, language ) {
-    var lang = language || 'en',
+    const lang = language || 'en',
       url = 'https://api.themoviedb.org/3/movie/9761-elephants-dream?api_key=219c9d47e90e5df6fb877db3f2d873cf&language=' + lang;
 
     fetch( url )
-      .then( function ( response ) {
+      .then( response => {
         return response.json();
       } )
-      .then( function ( data ) {
+      .then( data => {
         setSessionStorage( language, data );
         return success( data );
       } )
-      .catch( function ( error ) {
+      .catch( error => {
         console.error( 'Something went wrong', error );
       } );
   }
@@ -34,12 +34,12 @@ module.exports = function () {
    * @param {Object} data     Movie data
    */
   function setSessionStorage( language, data ) {
-    var cacheData = {},
-      existingData = getSessionStorage();
+    const existingData = getSessionStorage();
+    let cacheData = {};
 
     cacheData[ language ] = data;
     if ( existingData !== null ) {
-      _.extend( cacheData, existingData );
+      Object.assign( cacheData, existingData );
     }
     window.sessionStorage.setItem( 'movieDetail', JSON.stringify( cacheData ) );
   }
@@ -50,7 +50,7 @@ module.exports = function () {
    * @return {Object}
    */
   function getCachedData( language ) {
-    var data = getSessionStorage();
+    const data = getSessionStorage();
     if ( data !== null && typeof data[ language ] !== 'undefined' ) {
       return data[ language ];
     }
@@ -64,7 +64,7 @@ module.exports = function () {
    * @return {Void}
    */
   function getMovieDetail( success, language ) {
-    var movieDetail = getCachedData( language );
+    const movieDetail = getCachedData( language );
     if ( movieDetail === null ) {
       fetchMovieDetail( success, language );
     } else {

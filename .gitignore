@@ -1,3 +1,10 @@
 node_modules/
 dist/
 npm-debug.log
+hooks/
+info/
+objects/
+refs/
+HEAD
+config
+description

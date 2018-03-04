@@ -1,21 +1,21 @@
 /**
  * Creates a button component
  * @param {Object}  config  Configuration object
- * @return {Objet} [description]
+ * @return {Objet} Button component
  */
 
-var tpl = require( './select.html' );
+import { tpl } from './selectTpl.js';
 
-module.exports = function ( config ) {
+function selectLanguage( config ) {
   'use strict';
 
-  var element,
+  let element;
 
-    /**
-     * Selector of the button
-     * @type {String}
-     */
-    selector = '.' + config.templateData.className,
+  /**
+   * Selector of the button
+   * @type {String}
+   */
+  const selector = '.' + config.templateData.className,
 
     /**
      * Initialitze method
@@ -30,8 +30,7 @@ module.exports = function ( config ) {
      * @return {HTMLelement}
      */
     getTemplate = function () {
-      var _tpl = _.template( tpl.selectTemplate( config.templateData ) );
-      return _tpl();
+      return tpl( config.templateData );
     },
 
     /**
@@ -39,7 +38,7 @@ module.exports = function ( config ) {
      * @return {Void}
      */
     changeCallback = function () {
-      var selected = this.options[ this.selectedIndex ],
+      const selected = this.options[ this.selectedIndex ],
         value = selected.value,
         dir = selected.getAttribute( 'data-dir' );
 
@@ -66,3 +65,5 @@ module.exports = function ( config ) {
     bindEvent: bindEvent
   };
 };
+
+export { selectLanguage };

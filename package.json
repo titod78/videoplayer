@@ -1,23 +1,26 @@
 {
   "name": "VideoPlayer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.html",
   "scripts": {
     "start": "webpack --progress --colors --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --progress --colors"
+    "build": "webpack --progress --colors",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tito",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "es6-template-string-loader": "^2.0.0",
     "uglify-js": "^3.0.24",
     "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^3.1.0",
+    "webpack": "^3.8.1",
     "webpack-compile-templates": "^0.2.1"
   },
   "dependencies": {
-    "underscore": "^1.8.3",
     "dashjs": "^2.5.0"
   }
 }
