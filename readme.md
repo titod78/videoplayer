@@ -1,6 +1,7 @@
+
 # <a id="Video_Player_0"></a>Video Player
 
-# <a id="STARZ_PLAY_Code_Challenge_4"></a>Vanilla JavaScript Video Player.
+# <a id="STARZ_PLAY_Code_Challenge_4"></a>Vanilla JavaScript ES5 Video Player.
 
 *   Video Web Page
 *   You can play video in Chrome, Firefox and Safari
@@ -8,7 +9,7 @@
 *   The video has subtitles
 *   English and Arabic languages are supported
 
-For this project, i used a modular architecture based on components made with Vanilla JS. The reason is that i needn’t data persistence.
+For this project, i used a modular architecture based on components made with Vanilla JS ES5. The reason is that i needn’t data persistence.
 if is necessary, the components return a public interface for can used it from another components.
 The request to REST service are cached in broeser session storage.
 
@@ -16,7 +17,7 @@ The request to REST service are cached in broeser session storage.
 
 The technologies that i used are:
 
-*   [JavaScript] - JS Vanilla
+*   [JavaScript] - JS Vanilla ES5
 *   [HTML5]
 *   [CSS3]
 
