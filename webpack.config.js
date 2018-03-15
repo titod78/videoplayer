@@ -11,9 +11,6 @@ module.exports = {
   },
   module: {
     rules: [ {
-      test: /\.html$/,
-      use: 'webpack-compile-templates'
-    }, {
       test: /\.js$/,
       exclude: /(node_modules)/,
       use: {

@@ -17,8 +17,7 @@
     "es6-template-string-loader": "^2.0.0",
     "uglify-js": "^3.0.24",
     "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^3.8.1",
-    "webpack-compile-templates": "^0.2.1"
+    "webpack": "^3.8.1"
   },
   "dependencies": {
     "dashjs": "^2.5.0"
