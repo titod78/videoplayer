@@ -1,4 +1,4 @@
-node_modules/
+/node_modules
 dist/
 npm-debug.log
 hooks/
@@ -8,3 +8,4 @@ refs/
 HEAD
 description
 .DS_Store
+package-lock.json

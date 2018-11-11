@@ -1,6 +1,5 @@
-export const tpl = ( movieDetail ) => {
-  return `
-  <div class='card'>
+export const tpl = movieDetail =>
+  `<div class='card'>
     <div class='card_left'>
       <img src='${movieDetail.posterUrl}'>
     </div>
@@ -11,7 +10,7 @@ export const tpl = ( movieDetail ) => {
           <li>
             ${movieDetail.year}
           </li>
-            ${movieDetail.runtime !== null ? `<li>${movieDetail.runtimeFormat}</li>` : ''}
+            ${movieDetail.runtime !== null ? `<li>${movieDetail.runtimeFormat}</li>` : ""}
           <li>
             ${movieDetail.genre}
           </li>
@@ -20,7 +19,7 @@ export const tpl = ( movieDetail ) => {
           <p>
             ${movieDetail.overview}
           </p>
-          ${movieDetail.homepage !== null ? `<a href="${movieDetail.homepage}" target="_blank">Read more</a>` : ''}
+          ${movieDetail.homepage !== null ? `<a href="${movieDetail.homepage}" target="_blank">Read more</a>` : ""}
         </div>
         <div class='card_right__button'>
           <a target='_blank'>WATCH TRAILER</a>
@@ -29,4 +28,3 @@ export const tpl = ( movieDetail ) => {
     </div>
   </div>
 `;
-};

@@ -4,10 +4,10 @@
  * @return {Objet} Button component
  */
 
-import { tpl } from './selectTpl.js';
+import { tpl } from "./selectTpl.js";
 
-function selectLanguage( config ) {
-  'use strict';
+function selectLanguage(config) {
+  "use strict";
 
   let element;
 
@@ -15,45 +15,33 @@ function selectLanguage( config ) {
    * Selector of the button
    * @type {String}
    */
-  const selector = '.' + config.templateData.className,
-
+  const selector = `.${config.templateData.className}`,
     /**
      * Initialitze method
      * @return {void}
      */
-    init = function () {
-      element = getTemplate();
-    },
-
+    init = () => (element = getTemplate()),
     /**
      * Returns the component template
      * @return {HTMLelement}
      */
-    getTemplate = function () {
-      return tpl( config.templateData );
-    },
-
+    getTemplate = () => tpl(config.templateData),
     /**
      * Onchange's callback
      * @return {Void}
      */
-    changeCallback = function () {
-      const selected = this.options[ this.selectedIndex ],
+    changeCallback = function() {
+      const selected = this.options[this.selectedIndex],
         value = selected.value,
-        dir = selected.getAttribute( 'data-dir' );
+        dir = selected.getAttribute("data-dir");
 
-      config.fn( value, dir );
+      config.fn(value, dir);
     },
-
     /**
      * Bind click event to component
      * @return {void}
      */
-    bindEvent = function () {
-      document
-        .querySelector( selector )
-        .addEventListener( 'change', changeCallback, false );
-    };
+    bindEvent = () => document.querySelector(selector).addEventListener("change", changeCallback, false);
 
   init();
 
@@ -61,9 +49,9 @@ function selectLanguage( config ) {
    * Public API
    */
   return {
-    element: element,
-    bindEvent: bindEvent
+    element,
+    bindEvent
   };
-};
+}
 
 export { selectLanguage };

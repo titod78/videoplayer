@@ -5,11 +5,10 @@
  */
 
 export class buttonGetMovieDetail {
-
-  constructor( config ) {
+  constructor(config) {
     this._config = config;
     this._element = null;
-    this._selector = '.' + this._config.templateData.className;
+    this._selector = "." + this._config.templateData.className;
     this.init();
   }
 
@@ -37,9 +36,7 @@ export class buttonGetMovieDetail {
    * @return {void}
    */
   bindEvent() {
-    document
-      .querySelector( this.selector )
-      .addEventListener( 'click', this.config.fn, false );
+    document.querySelector(this.selector).addEventListener("click", this.config.fn, false);
   }
 
   /**
@@ -47,9 +44,9 @@ export class buttonGetMovieDetail {
    * @return {void}
    */
   remove() {
-    let el = document.querySelector( this.selector );
-    el.removeEventListener( 'click', this.config.fn, false );
-    el.parentNode.removeChild( el );
+    const el = document.querySelector(this.selector);
+    el.removeEventListener("click", this.config.fn, false);
+    el.parentNode.removeChild(el);
   }
 
   get element() {
@@ -63,5 +60,4 @@ export class buttonGetMovieDetail {
   get selector() {
     return this._selector;
   }
-
-};
+}

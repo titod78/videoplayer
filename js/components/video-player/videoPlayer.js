@@ -1,33 +1,29 @@
-import { Config } from '../../config/config.js';
+import { Config } from "../../config/config.js";
+import { MediaPlayer } from "dashjs";
+import { tpl } from "./videoPlayerTpl.js";
 
 /**
  * Create the video using dash.js library
  * @return {void}
  */
 
-import { MediaPlayer } from 'dashjs';
-import { tpl } from './videoPlayerTpl.js';
-
 function videoPlayer() {
-  'use strict';
+  "use strict";
 
   let config;
 
-  const init = function () {
+  const init = () => {
     config = new Config();
-    if ( config.isSafari === false ) {
+    if (config.isSafari === false) {
       createVideoPlayer();
     } else {
       loadVideo();
     }
   };
 
-  const getUrl = function () {
+  const getUrl = () => {
     let url = config.videoUrl;
-    if ( config.isSafari ) {
-      url = config.videoUrlSafari;
-    }
-
+    config.isSafari && (url = config.videoUrlSafari);
     return url;
   };
 
@@ -35,35 +31,29 @@ function videoPlayer() {
    * Creates video player
    * @return {Void}
    */
-  const createVideoPlayer = function () {
-    const player = dashjs.MediaPlayer().create();
+  const createVideoPlayer = () => {
+    const player = MediaPlayer().create();
     loadVideo();
-    player.initialize( document.querySelector( '#videoPlayer' ), getUrl(), true );
+    player.initialize(document.querySelector("#videoPlayer"), getUrl(), true);
   };
 
   /**
    * Returns the component template
    * @return {HTMLelement}
    */
-  const getTemplate = function () {
-    const data = {
+  const getTemplate = () =>
+    tpl({
       isSafari: config.isSafari,
       url: getUrl()
-    };
-
-    return tpl( data );
-  };
+    });
 
   /**
    * Loads video
    * @return {Void}
    */
-  const loadVideo = function () {
-    document.querySelector( '.video-player-container' ).innerHTML = getTemplate();
-  };
+  const loadVideo = () => (document.querySelector(".video-player-container").innerHTML = getTemplate());
 
   init();
-
-};
+}
 
 export { videoPlayer };

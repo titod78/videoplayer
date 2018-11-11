@@ -1,4 +1,4 @@
-import { Config } from '../config/config.js';
+import { Config } from "../config/config.js";
 
 /**
  * Send request to service for obtains the movie information
@@ -6,7 +6,7 @@ import { Config } from '../config/config.js';
  */
 
 export function movieDetailService() {
-  'use strict';
+  "use strict";
 
   const config = new Config();
 
@@ -15,21 +15,17 @@ export function movieDetailService() {
    * @param  {Function} success Callback for success response
    * @return {Void}
    */
-  function fetchMovieDetail( success, language ) {
+  function fetchMovieDetail(success, language) {
     const lang = language || config.lang,
       url = config.movieDetailUrl + lang;
 
-    fetch( url )
-      .then( response => {
-        return response.json();
-      } )
-      .then( data => {
-        setSessionStorage( language, data );
-        return success( data );
-      } )
-      .catch( error => {
-        console.error( 'Something went wrong', error );
-      } );
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        setSessionStorage(language, data);
+        return success(data);
+      })
+      .catch(error => console.error("Something went wrong", error));
   }
 
   /**
@@ -37,15 +33,13 @@ export function movieDetailService() {
    * @param {String} language Selected language
    * @param {Object} data     Movie data
    */
-  function setSessionStorage( language, data ) {
+  function setSessionStorage(language, data) {
     const existingData = getSessionStorage();
     let cacheData = {};
 
-    cacheData[ language ] = data;
-    if ( existingData !== null ) {
-      Object.assign( cacheData, existingData );
-    }
-    window.sessionStorage.setItem( 'movieDetail', JSON.stringify( cacheData ) );
+    cacheData[language] = data;
+    existingData !== null && Object.assign(cacheData, existingData);
+    window && window.sessionStorage.setItem("movieDetail", JSON.stringify(cacheData));
   }
 
   /**
@@ -53,10 +47,10 @@ export function movieDetailService() {
    * @param  {String} language Selected language
    * @return {Object}
    */
-  function getCachedData( language ) {
+  function getCachedData(language) {
     const data = getSessionStorage();
-    if ( data !== null && typeof data[ language ] !== 'undefined' ) {
-      return data[ language ];
+    if (data !== null && typeof data[language] !== "undefined") {
+      return data[language];
     }
     return null;
   }
@@ -67,12 +61,12 @@ export function movieDetailService() {
    * @param {String}   language Selected language
    * @return {Void}
    */
-  function getMovieDetail( success, language ) {
-    const movieDetail = getCachedData( language );
-    if ( movieDetail === null ) {
-      fetchMovieDetail( success, language );
+  function getMovieDetail(success, language) {
+    const movieDetail = getCachedData(language);
+    if (movieDetail === null) {
+      fetchMovieDetail(success, language);
     } else {
-      success( movieDetail );
+      success(movieDetail);
     }
   }
 
@@ -81,7 +75,7 @@ export function movieDetailService() {
    * @return {Object}
    */
   function getSessionStorage() {
-    return JSON.parse( window.sessionStorage.getItem( 'movieDetail' ) );
+    return JSON.parse(window.sessionStorage.getItem("movieDetail"));
   }
 
   /**
@@ -90,5 +84,4 @@ export function movieDetailService() {
   return {
     getMovieDetail: getMovieDetail
   };
-
-};
+}
